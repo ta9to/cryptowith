@@ -1,0 +1,8 @@
+{
+  "ethereum": {
+    "name": "ethereum",
+    "unit": "ETH",
+    "description": "Ethereum is a smart contract platform that enables developers to build decentralized applications and decentralized autonomous organizations. Ethereum offers extensive tooling and is the dominant platform for ICOs, dApps and DAOs.",
+    "webSite": "https://ethereum.org/ja/"
+  }  
+}
