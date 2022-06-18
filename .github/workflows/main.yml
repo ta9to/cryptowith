@@ -1,0 +1,30 @@
+name: Deploy to S3
+on:
+  push:
+    branches: [main]
+env:
+  AWS_ROLE_ARN: arn:aws:iam::721814306249:role/ta9to.com-GithubActions-DeployToS3
+  AWS_REGION : ap-northeast-1
+  BUCKET_NAME : cryptowith.jp
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  deploy-to-s3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - run: npm install
+      - run: npm run export
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          role-session-name: github-oidc-role-session
+          aws-region: ${{ env.AWS_REGION }}
+      - run: aws s3 sync ./out s3://${{ env.BUCKET_NAME }}/
