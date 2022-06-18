@@ -17,6 +17,7 @@ import {
 } from '@heroicons/react/solid'
 import { BellIcon, FireIcon, HomeIcon, MenuIcon, TrendingUpIcon, UserGroupIcon, XIcon, DatabaseIcon } from '@heroicons/react/outline'
 import Link from "next/link";
+import Gtag from "./gtag";
 
 const user = {
     name: 'Chelsea Hagon',
@@ -88,9 +89,7 @@ const Layout = ({ preview, children }: Props) => {
   return (
     <>
       <Meta />
-      {/*<div className="min-h-screen">*/}
-      {/*  <main>{children}</main>*/}
-      {/*</div>*/}
+        <Gtag />
         <div className="min-h-full">
             {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
             <Popover
