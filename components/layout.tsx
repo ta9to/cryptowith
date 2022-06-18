@@ -233,7 +233,7 @@ const Layout = ({ preview, children }: Props) => {
                         <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
                             <div className="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
                                 {navigation.map((item) => (
-                                    <Link key={item.name} href={item.name}>
+                                    <Link key={item.name} href={item.href}>
                                     <a
                                         key={item.name}
                                         href={item.href}
