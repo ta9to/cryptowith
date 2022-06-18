@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
 env:
-  AWS_ROLE_ARN: arn:aws:iam::721814306249:role/ta9to.com-GithubActions-DeployToS3
+  AWS_ROLE_ARN: arn:aws:iam::721814306249:role/cryptowith.jp-GithubActions-DeployToS3
   AWS_REGION : ap-northeast-1
   BUCKET_NAME : cryptowith.jp
 permissions:
