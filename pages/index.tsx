@@ -94,11 +94,11 @@ const Index = ({ allCryptos }: Props) => {
                             <span className="flex flex-col text-gray-500 text-sm truncate">
                                                     <span className="flex items-center">
                                                         <span className="h-10 w-10 flex-shrink-0">
-                                                            <img className="h-10 w-10 rounded-full" src={crypto.icon} alt="" />
+                                                            <img className="h-10 w-10 rounded-full" src={`/assets/cryptos/${crypto.name}.png`} alt="" />
                                                         </span>
                                                         <span className="ml-4">
-                                                            <span className="font-medium text-gray-900"><a href={`/projects/${crypto.name}`}>{crypto.name}</a></span>
-                                                            <span className="text-gray-500">{crypto.unit}</span>
+                                                            <span className="font-medium text-gray-900"><a href={`/projects/${crypto.slug}`}>{crypto.name}</a></span>
+                                                            <span className="text-gray-500">{crypto.symbol}</span>
                                                         </span>
                                                     </span>
                             </span>
@@ -149,13 +149,7 @@ const Index = ({ allCryptos }: Props) => {
                                                 className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                 scope="col"
                                             >
-                                                説明
-                                            </th>
-                                            <th
-                                                className="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                scope="col"
-                                            >
-                                                値段
+                                                タグ
                                             </th>
                                         </tr>
                                         </thead>
@@ -165,50 +159,57 @@ const Index = ({ allCryptos }: Props) => {
                                                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                                     <div className="flex items-center">
                                                         <div className="h-10 w-10 flex-shrink-0">
-                                                            <img className="h-10 w-10 rounded-full" src={crypto.icon} alt="" />
+                                                            <img className="h-10 w-10 rounded-full" src={`/assets/cryptos/${crypto.name}.png`} alt="" />
                                                         </div>
                                                         <div className="ml-4">
-                                                            <div className="font-medium text-gray-900"><a href={`/projects/${crypto.name}`}>{crypto.name}</a></div>
-                                                            <div className="text-gray-500">{crypto.unit}</div>
+                                                            <div className="font-medium text-gray-900"><a href={`/projects/${crypto.slug}`}>{crypto.name}</a></div>
+                                                            <div className="text-gray-500">{crypto.symbol}</div>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td className="px-6 py-4 text-left whitespace-nowrap text-sm text-gray-500">
-                                                    <span className="text-gray-900 font-medium">{crypto.description}</span>
-                                                </td>
-                                                <td className="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-                                                    <span className="text-gray-900 font-medium">{crypto.unit_price}</span>
+                                                <td className="hidden px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:block">
+                                                    {crypto["tag-names"]?.map((tag) => (
+                                <span
+                                    key={tag}
+                                    className={classNames(
+                                        'bg-green-100 text-green-800',
+                                        'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize'
+                                    )}
+                                >
+                                  {tag}
+                                </span>
+                                                    ))}
                                                 </td>
                                             </tr>
                                         ))}
                                         </tbody>
                                     </table>
                                     {/* Pagination */}
-                                    <nav
-                                        className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
-                                        aria-label="Pagination"
-                                    >
-                                        <div className="hidden sm:block">
-                                            <p className="text-sm text-gray-700">
-                                                Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}
-                                                <span className="font-medium">20</span> results
-                                            </p>
-                                        </div>
-                                        <div className="flex-1 flex justify-between sm:justify-end">
-                                            <a
-                                                href="#"
-                                                className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                                            >
-                                                Previous
-                                            </a>
-                                            <a
-                                                href="#"
-                                                className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                                            >
-                                                Next
-                                            </a>
-                                        </div>
-                                    </nav>
+                                    {/*<nav*/}
+                                    {/*    className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"*/}
+                                    {/*    aria-label="Pagination"*/}
+                                    {/*>*/}
+                                    {/*    <div className="hidden sm:block">*/}
+                                    {/*        <p className="text-sm text-gray-700">*/}
+                                    {/*            Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}*/}
+                                    {/*            <span className="font-medium">20</span> results*/}
+                                    {/*        </p>*/}
+                                    {/*    </div>*/}
+                                    {/*    <div className="flex-1 flex justify-between sm:justify-end">*/}
+                                    {/*        <a*/}
+                                    {/*            href="#"*/}
+                                    {/*            className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"*/}
+                                    {/*        >*/}
+                                    {/*            Previous*/}
+                                    {/*        </a>*/}
+                                    {/*        <a*/}
+                                    {/*            href="#"*/}
+                                    {/*            className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"*/}
+                                    {/*        >*/}
+                                    {/*            Next*/}
+                                    {/*        </a>*/}
+                                    {/*    </div>*/}
+                                    {/*</nav>*/}
                                 </div>
                             </div>
                         </div>
@@ -222,35 +223,39 @@ const Index = ({ allCryptos }: Props) => {
 export default Index
 
 export const getStaticProps = async () => {
-    const allCryptos = [
-        {
-            unit: 'BTC',
-            name: 'bitcoin',
-            icon: '/assets/cryptos/Bitcoin.png',
-            description: 'Bitcoin is an experimental digital currency that enables instant payments to anyone, anywhere in the world.',
-            public_youtube_url: 'https://youtu.be/Rtrqb-FgKCs',
-            unit_price: '¥2,502,365.63',
-            total_market_price: '¥47,466,745,510,992',
-        },
-        {
-            unit: 'ETH',
-            name: 'ethereum',
-            icon: '/assets/cryptos/Ethereum.png',
-            description: 'Ethereum is a global, open-source platform for decentralized applications.',
-            public_youtube_url: 'https://youtu.be/j23HnORQXvs',
-            unit_price: '¥2,502,365.63',
-            total_market_price: '¥47,466,745,510,992',
-        },
-        {
-            unit: 'DOT',
-            name: 'polkadot',
-            icon: '/assets/cryptos/Polkadot.png',
-            description: 'Polkadot empowers blockchain networks to work together under the protection of shared security.',
-            public_youtube_url: 'https://youtu.be/s75_OZ7vtk8',
-            unit_price: '¥2,502,365.63',
-            total_market_price: '¥47,466,745,510,992',
-        },
+    const targets = [
+        'BTC',
+        'ETH',
+        // 'USDC',
+        // 'BNB',
+        // 'XRP',
+        // 'SOL',
+        // 'DOGE',
+        'DOT',
+        // 'SHIB',
+        // 'XLM',
+        // 'BCH',
+        // 'ETC',
+        // 'MANA',
+        // 'FIL',
+        // 'AXS',
+        // 'SAND',
+        // 'GMT',
+        // 'ENJ',
+        // 'XEM',
+        // 'QTUM',
+        // 'IOST',
     ]
+    const api_url = `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?symbol=${targets.join(',')}`
+    const response = await fetch(api_url, {
+        // @ts-ignore
+        headers: {
+            'X-CMC_PRO_API_KEY': process.env.CMC_PRO_API_KEY,
+        },
+    })
+    const json = await response.json()
+    // @ts-ignore
+    const allCryptos = Object.entries(json.data).map(crypto => crypto[1][0])
     return {
         props: { allCryptos },
     }
