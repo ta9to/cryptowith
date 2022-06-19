@@ -2,6 +2,9 @@ import React from 'react'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as _ from "lodash"
+import Layout from '../../components/layout'
+import Head from "next/head";
+import Container from '../../components/container'
 
 type projectPropsType = {
   data : {
@@ -14,12 +17,17 @@ type projectPropsType = {
 
 const Project = ({ data } : projectPropsType) => {
   return (
-    <div>
-      {data.name}
-      <li>{data.unit}</li>
-      <li>{data.description}</li>
-      <li>{data.webSite}</li>
-    </div>
+    <Layout>
+      <Head>
+        <title>{data.name} | CryptoWith</title>
+      </Head>
+      <Container>
+        {data.name}
+        <li>{data.unit}</li>
+        <li>{data.description}</li>
+        <li>{data.webSite}</li>
+      </Container>
+    </Layout>
   )
 }
 

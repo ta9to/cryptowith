@@ -1,6 +1,6 @@
 ---
-title: 'web3ニュースメディアCryptoWith始めます'
-excerpt: 'web3ニュースメディアCryptoWith始めます!'
+title: 'web3メディアCryptoWith始めます'
+excerpt: 'web3メディアCryptoWith始めます!'
 coverImage: '/assets/blog/launch/logo_transparent_background.png'
 date: '2020-07-01T10:00:00'
 author:
@@ -10,4 +10,4 @@ ogImage:
   url: '/assets/blog/launch/logo_transparent_background.png'
 ---
 
-web3ニュースメディアCryptoWith始めます!!
+web3メディアCryptoWith始めます!!

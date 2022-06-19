@@ -1,233 +1,257 @@
 import Container from '../components/container'
 import Layout from '../components/layout'
-import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
-import Post from '../types/post'
-import Link from 'next/link'
-
-// const tabs = [
-//   { name: 'Recent', href: '#', current: true },
-//   { name: 'Most Liked', href: '#', current: false },
-//   { name: 'Most Answers', href: '#', current: false },
-// ]
-
-// function classNames(...classes:any) {
-//   return classes.filter(Boolean).join(' ')
-// }
+import Crypto from '../types/crypto'
+import {CashIcon, ChevronRightIcon} from "@heroicons/react/solid";
+import {ScaleIcon} from "@heroicons/react/outline";
 
 type Props = {
-  allPosts: Post[]
+    allCryptos: Crypto[]
 }
 
-const Index = ({ allPosts }: Props) => {
-  return (
-    <>
-      <Layout>
-        <Head>
-          <title>CryptoWith</title>
-        </Head>
-        <Container>
-          {/*{allPosts.length > 0 && <MoreStories posts={allPosts} />}*/}
-        {/*  <div className="px-4 sm:px-0">*/}
-        {/*  <div className="sm:hidden">*/}
-        {/*    <label htmlFor="question-tabs" className="sr-only">*/}
-        {/*      Select a tab*/}
-        {/*    </label>*/}
-        {/*    <select*/}
-        {/*        id="question-tabs"*/}
-        {/*        className="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500"*/}
-        {/*        defaultValue={tabs.find((tab) => tab.current).name}*/}
-        {/*    >*/}
-        {/*      {tabs.map((tab) => (*/}
-        {/*          <option key={tab.name}>{tab.name}</option>*/}
-        {/*      ))}*/}
-        {/*    </select>*/}
-        {/*  </div>*/}
-        {/*  <div className="hidden sm:block">*/}
-        {/*    <nav className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">*/}
-        {/*      {tabs.map((tab, tabIdx) => (*/}
-        {/*          <a*/}
-        {/*              key={tab.name}*/}
-        {/*              href={tab.href}*/}
-        {/*              aria-current={tab.current ? 'page' : undefined}*/}
-        {/*              className={classNames(*/}
-        {/*                  tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',*/}
-        {/*                  tabIdx === 0 ? 'rounded-l-lg' : '',*/}
-        {/*                  tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '',*/}
-        {/*                  'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10'*/}
-        {/*              )}*/}
-        {/*          >*/}
-        {/*            <span>{tab.name}</span>*/}
-        {/*            <span*/}
-        {/*                aria-hidden="true"*/}
-        {/*                className={classNames(*/}
-        {/*                    tab.current ? 'bg-rose-500' : 'bg-transparent',*/}
-        {/*                    'absolute inset-x-0 bottom-0 h-0.5'*/}
-        {/*                )}*/}
-        {/*            />*/}
-        {/*          </a>*/}
-        {/*      ))}*/}
-        {/*    </nav>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
-          <div>{/*<div className="mt-4">*/}
-            <h1 className="sr-only">Recent questions</h1>
-            <ul role="list" className="space-y-4">
-              {allPosts.map((post) => (
-                  <li key={post.slug} className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
-                    <Link href={`/posts/${post.slug}`}>
-                      <a>
-                        <article aria-labelledby={'question-title-' + post.slug}>
-                      <div>
-                        <div className="flex space-x-3">
-                          <div className="flex-shrink-0">
-                            <img className="h-10 w-10 rounded-full" src={post.author.picture} alt="" />
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <p className="text-sm font-medium text-gray-900">
-                                {post.author.name}
-                            </p>
-                            <p className="text-sm text-gray-500">
-                                <time dateTime={post.date}>{post.date}</time>
-                            </p>
-                          </div>
-                          {/*<div className="flex-shrink-0 self-center flex">*/}
-                          {/*  <Menu as="div" className="relative inline-block text-left">*/}
-                          {/*    <div>*/}
-                          {/*      <Menu.Button className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600">*/}
-                          {/*        <span className="sr-only">Open options</span>*/}
-                          {/*        <DotsVerticalIcon className="h-5 w-5" aria-hidden="true" />*/}
-                          {/*      </Menu.Button>*/}
-                          {/*    </div>*/}
+const transactions = [
+    {
+        id: 1,
+        name: 'Payment to Molly Sanders',
+        href: '#',
+        amount: '$20,000',
+        currency: 'USD',
+        status: 'success',
+        date: 'July 11, 2020',
+        datetime: '2020-07-11',
+    },
+    // More transactions...
+]
 
-                          {/*    <Transition*/}
-                          {/*        as={Fragment}*/}
-                          {/*        enter="transition ease-out duration-100"*/}
-                          {/*        enterFrom="transform opacity-0 scale-95"*/}
-                          {/*        enterTo="transform opacity-100 scale-100"*/}
-                          {/*        leave="transition ease-in duration-75"*/}
-                          {/*        leaveFrom="transform opacity-100 scale-100"*/}
-                          {/*        leaveTo="transform opacity-0 scale-95"*/}
-                          {/*    >*/}
-                          {/*      <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">*/}
-                          {/*        <div className="py-1">*/}
-                          {/*          <Menu.Item>*/}
-                          {/*            {({ active }) => (*/}
-                          {/*                <a*/}
-                          {/*                    href="#"*/}
-                          {/*                    className={classNames(*/}
-                          {/*                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',*/}
-                          {/*                        'flex px-4 py-2 text-sm'*/}
-                          {/*                    )}*/}
-                          {/*                >*/}
-                          {/*                  <StarIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />*/}
-                          {/*                  <span>Add to favorites</span>*/}
-                          {/*                </a>*/}
-                          {/*            )}*/}
-                          {/*          </Menu.Item>*/}
-                          {/*          <Menu.Item>*/}
-                          {/*            {({ active }) => (*/}
-                          {/*                <a*/}
-                          {/*                    href="#"*/}
-                          {/*                    className={classNames(*/}
-                          {/*                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',*/}
-                          {/*                        'flex px-4 py-2 text-sm'*/}
-                          {/*                    )}*/}
-                          {/*                >*/}
-                          {/*                  <CodeIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />*/}
-                          {/*                  <span>Embed</span>*/}
-                          {/*                </a>*/}
-                          {/*            )}*/}
-                          {/*          </Menu.Item>*/}
-                          {/*          <Menu.Item>*/}
-                          {/*            {({ active }) => (*/}
-                          {/*                <a*/}
-                          {/*                    href="#"*/}
-                          {/*                    className={classNames(*/}
-                          {/*                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',*/}
-                          {/*                        'flex px-4 py-2 text-sm'*/}
-                          {/*                    )}*/}
-                          {/*                >*/}
-                          {/*                  <FlagIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />*/}
-                          {/*                  <span>Report content</span>*/}
-                          {/*                </a>*/}
-                          {/*            )}*/}
-                          {/*          </Menu.Item>*/}
-                          {/*        </div>*/}
-                          {/*      </Menu.Items>*/}
-                          {/*    </Transition>*/}
-                          {/*  </Menu>*/}
-                          {/*</div>*/}
+const statusStyles = {
+    success: 'bg-green-100 text-green-800',
+    processing: 'bg-yellow-100 text-yellow-800',
+    failed: 'bg-gray-100 text-gray-800',
+}
+
+const cards = [
+    { name: 'Account balance', href: '#', icon: ScaleIcon, amount: '$30,659.45' },
+    // More items...
+]
+
+function classNames(...classes:any) {
+    return classes.filter(Boolean).join(' ')
+}
+
+const Index = ({ allCryptos }: Props) => {
+    return (
+        <>
+            <Layout>
+                <Head>
+                    <title>仮想通貨 | CryptoWith</title>
+                </Head>
+                <Container>
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 className="text-lg leading-6 font-medium text-gray-900">Overview</h2>
+                        <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                            {/* Card */}
+                            {cards.map((card) => (
+                                <div key={card.name} className="bg-white overflow-hidden shadow rounded-lg">
+                                    <div className="p-5">
+                                        <div className="flex items-center">
+                                            <div className="flex-shrink-0">
+                                                <card.icon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                                            </div>
+                                            <div className="ml-5 w-0 flex-1">
+                                                <dl>
+                                                    <dt className="text-sm font-medium text-gray-500 truncate">{card.name}</dt>
+                                                    <dd>
+                                                        <div className="text-lg font-medium text-gray-900">{card.amount}</div>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="bg-gray-50 px-5 py-3">
+                                        <div className="text-sm">
+                                            <a href={card.href} className="font-medium text-rose-700 hover:text-cyan-900">
+                                                View all
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                        <h2 id={'question-title-' + post.slug} className="mt-4 text-base font-medium text-gray-900">
-                          {post.title}
-                        </h2>
-                      </div>
-                      <div
-                          className="mt-2 text-sm text-gray-700 space-y-4"
-                          dangerouslySetInnerHTML={{ __html: post.excerpt }}
-                      />
-                      {/*<div className="mt-6 flex justify-between space-x-8">*/}
-                      {/*  <div className="flex space-x-6">*/}
-                      {/*      <span className="inline-flex items-center text-sm">*/}
-                      {/*        <button type="button" className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">*/}
-                      {/*          <ThumbUpIcon className="h-5 w-5" aria-hidden="true" />*/}
-                      {/*          <span className="font-medium text-gray-900">{question.likes}</span>*/}
-                      {/*          <span className="sr-only">likes</span>*/}
-                      {/*        </button>*/}
-                      {/*      </span>*/}
-                      {/*    <span className="inline-flex items-center text-sm">*/}
-                      {/*        <button type="button" className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">*/}
-                      {/*          <ChatAltIcon className="h-5 w-5" aria-hidden="true" />*/}
-                      {/*          <span className="font-medium text-gray-900">{question.replies}</span>*/}
-                      {/*          <span className="sr-only">replies</span>*/}
-                      {/*        </button>*/}
-                      {/*      </span>*/}
-                      {/*    <span className="inline-flex items-center text-sm">*/}
-                      {/*        <button type="button" className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">*/}
-                      {/*          <EyeIcon className="h-5 w-5" aria-hidden="true" />*/}
-                      {/*          <span className="font-medium text-gray-900">{question.views}</span>*/}
-                      {/*          <span className="sr-only">views</span>*/}
-                      {/*        </button>*/}
-                      {/*      </span>*/}
-                      {/*  </div>*/}
-                      {/*  <div className="flex text-sm">*/}
-                      {/*      <span className="inline-flex items-center text-sm">*/}
-                      {/*        <button type="button" className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">*/}
-                      {/*          <ShareIcon className="h-5 w-5" aria-hidden="true" />*/}
-                      {/*          <span className="font-medium text-gray-900">Share</span>*/}
-                      {/*        </button>*/}
-                      {/*      </span>*/}
-                      {/*  </div>*/}
-                      {/*</div>*/}
-                    </article>
+                    </div>
 
-                      </a>
-                    </Link>
-                  </li>
-              ))}
-            </ul>
-          </div>
+                    <h2 className="max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">
+                        仮想通貨
+                    </h2>
 
-        </Container>
-      </Layout>
-    </>
-  )
+                    {/* Activity list (smallest breakpoint only) */}
+                    <div className="shadow sm:hidden">
+                        <ul role="list" className="mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden">
+                            {allCryptos.map((crypto) => (
+                                <li key={crypto.name}>
+                                    <span className="block px-4 py-4 bg-white hover:bg-gray-50">
+                        <span className="flex items-center space-x-4">
+                          <span className="flex-1 flex space-x-2 truncate">
+                            <span className="flex flex-col text-gray-500 text-sm truncate">
+                                                    <span className="flex items-center">
+                                                        <span className="h-10 w-10 flex-shrink-0">
+                                                            <img className="h-10 w-10 rounded-full" src={crypto.icon} alt="" />
+                                                        </span>
+                                                        <span className="ml-4">
+                                                            <span className="font-medium text-gray-900"><a href={`/projects/${crypto.name}`}>{crypto.name}</a></span>
+                                                            <span className="text-gray-500">{crypto.unit}</span>
+                                                        </span>
+                                                    </span>
+                            </span>
+                          </span>
+                          <ChevronRightIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
+                        </span>
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <nav
+                            className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200"
+                            aria-label="Pagination"
+                        >
+                            <div className="flex-1 flex justify-between">
+                                <a
+                                    href="#"
+                                    className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500"
+                                >
+                                    Previous
+                                </a>
+                                <a
+                                    href="#"
+                                    className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500"
+                                >
+                                    Next
+                                </a>
+                            </div>
+                        </nav>
+                    </div>
+
+                    {/* Activity table (small breakpoint and up) */}
+                    <div className="hidden sm:block">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex flex-col mt-2">
+                                <div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
+                                    <table className="min-w-full divide-y divide-gray-200">
+                                        <thead>
+                                        <tr>
+                                            <th
+                                                className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                scope="col"
+                                            >
+                                                名前
+                                            </th>
+                                            <th
+                                                className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                scope="col"
+                                            >
+                                                説明
+                                            </th>
+                                            <th
+                                                className="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                scope="col"
+                                            >
+                                                値段
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody className="bg-white divide-y divide-gray-200">
+                                        {allCryptos.map((crypto) => (
+                                            <tr key={crypto.name} className="bg-white">
+                                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                                    <div className="flex items-center">
+                                                        <div className="h-10 w-10 flex-shrink-0">
+                                                            <img className="h-10 w-10 rounded-full" src={crypto.icon} alt="" />
+                                                        </div>
+                                                        <div className="ml-4">
+                                                            <div className="font-medium text-gray-900"><a href={`/projects/${crypto.name}`}>{crypto.name}</a></div>
+                                                            <div className="text-gray-500">{crypto.unit}</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4 text-left whitespace-nowrap text-sm text-gray-500">
+                                                    <span className="text-gray-900 font-medium">{crypto.description}</span>
+                                                </td>
+                                                <td className="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
+                                                    <span className="text-gray-900 font-medium">{crypto.unit_price}</span>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                        </tbody>
+                                    </table>
+                                    {/* Pagination */}
+                                    <nav
+                                        className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+                                        aria-label="Pagination"
+                                    >
+                                        <div className="hidden sm:block">
+                                            <p className="text-sm text-gray-700">
+                                                Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}
+                                                <span className="font-medium">20</span> results
+                                            </p>
+                                        </div>
+                                        <div className="flex-1 flex justify-between sm:justify-end">
+                                            <a
+                                                href="#"
+                                                className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                            >
+                                                Previous
+                                            </a>
+                                            <a
+                                                href="#"
+                                                className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                                            >
+                                                Next
+                                            </a>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Container>
+            </Layout>
+        </>
+    )
 }
 
 export default Index
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
-  ])
-
-  return {
-    props: { allPosts },
-  }
+    const allCryptos = [
+        {
+            unit: 'BTC',
+            name: 'bitcoin',
+            icon: '/assets/cryptos/Bitcoin.png',
+            description: 'Bitcoin is an experimental digital currency that enables instant payments to anyone, anywhere in the world.',
+            public_youtube_url: 'https://youtu.be/Rtrqb-FgKCs',
+            unit_price: '¥2,502,365.63',
+            total_market_price: '¥47,466,745,510,992',
+        },
+        {
+            unit: 'ETH',
+            name: 'ethereum',
+            icon: '/assets/cryptos/Ethereum.png',
+            description: 'Ethereum is a global, open-source platform for decentralized applications.',
+            public_youtube_url: 'https://youtu.be/j23HnORQXvs',
+            unit_price: '¥2,502,365.63',
+            total_market_price: '¥47,466,745,510,992',
+        },
+        {
+            unit: 'DOT',
+            name: 'polkadot',
+            icon: '/assets/cryptos/Polkadot.png',
+            description: 'Polkadot empowers blockchain networks to work together under the protection of shared security.',
+            public_youtube_url: 'https://youtu.be/s75_OZ7vtk8',
+            unit_price: '¥2,502,365.63',
+            total_market_price: '¥47,466,745,510,992',
+        },
+    ]
+    return {
+        props: { allCryptos },
+    }
 }
