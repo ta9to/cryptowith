@@ -22,8 +22,12 @@ jobs:
         with:
           node-version: 16.x
       - run: npm install
+      - name: Create env file
+        run: |
+          touch .env
+          echo CMC_PRO_API_KEY=${{ secrets.CMC_PRO_API_KEY }} >> .env
+          cat .env
       - run: npm run export
-      - run: CMC_PRO_API_KEY=${{ secrets.CMC_PRO_API_KEY }} npm run export
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
