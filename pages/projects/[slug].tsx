@@ -7,6 +7,7 @@ import markdownToHtml from '../../lib/markdownToHtml'
 import PostBody from '../../components/post-body'
 import YouTube from 'react-youtube';
 import Layout from '../../components/layout'
+import Head from "next/head";
 import Container from '../../components/container'
 
 type projectPropsType = {
@@ -26,6 +27,9 @@ const Project = ({ data, content } : projectPropsType) => {
   return (
     <Layout>
       <Container>
+        <Head>
+          <title>{data.name} | CryptoWith</title>
+        </Head>
         <div>
           <div className="bg-white pb-6 sm:pb-8 lg:pb-12">
             <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">

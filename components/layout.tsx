@@ -15,7 +15,17 @@ import {
     StarIcon,
     ThumbUpIcon,
 } from '@heroicons/react/solid'
-import { BellIcon, FireIcon, HomeIcon, MenuIcon, TrendingUpIcon, UserGroupIcon, XIcon, DatabaseIcon } from '@heroicons/react/outline'
+import {
+    BellIcon,
+    FireIcon,
+    HomeIcon,
+    MenuIcon,
+    TrendingUpIcon,
+    UserGroupIcon,
+    XIcon,
+    DatabaseIcon,
+    CogIcon, QuestionMarkCircleIcon, ShieldCheckIcon
+} from '@heroicons/react/outline'
 import Link from "next/link";
 import Gtag from "./gtag";
 
@@ -26,10 +36,16 @@ const user = {
         'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-    { name: 'Home', href: '/', icon: HomeIcon, current: false },
-    { name: 'Cryptos', href: '/projects', icon: DatabaseIcon, current: false },
-    // { name: 'Communities', href: '#', icon: UserGroupIcon, current: false },
+    { name: '仮想通貨', href: '/', icon: HomeIcon, current: false },
+    { name: '取引所', href: '/todo/', icon: DatabaseIcon, current: false },
+    { name: 'NFT', href: '/todo/', icon: UserGroupIcon, current: false },
+    { name: 'Blog', href: '/posts/', icon: UserGroupIcon, current: false },
     // { name: 'Trending', href: '#', icon: TrendingUpIcon, current: false },
+]
+const secondaryNavigation = [
+    { name: 'Settings', href: '#', icon: CogIcon },
+    { name: 'Help', href: '#', icon: QuestionMarkCircleIcon },
+    { name: 'Privacy', href: '#', icon: ShieldCheckIcon },
 ]
 const userNavigation = [
     { name: 'Your Profile', href: '#' },
@@ -103,7 +119,7 @@ const Layout = ({ preview, children }: Props) => {
             >
                 {({ open }) => (
                     <>
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="container mx-auto px-5 sm:px-6 lg:px-8">
                             <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
                                 <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
                                     <div className="flex-shrink-0 flex items-center">
@@ -139,6 +155,7 @@ const Layout = ({ preview, children }: Props) => {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
                                     {/* Mobile menu button */}
                                     <Popover.Button className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rose-500">
@@ -150,62 +167,78 @@ const Layout = ({ preview, children }: Props) => {
                                         )}
                                     </Popover.Button>
                                 </div>
-                                {/*<div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">*/}
-                                {/*    <a href="#" className="text-sm font-medium text-gray-900 hover:underline">*/}
-                                {/*        Go Premium*/}
-                                {/*    </a>*/}
-                                {/*    <a*/}
-                                {/*        href="#"*/}
-                                {/*        className="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"*/}
-                                {/*    >*/}
-                                {/*        <span className="sr-only">View notifications</span>*/}
-                                {/*        <BellIcon className="h-6 w-6" aria-hidden="true" />*/}
-                                {/*    </a>*/}
+                                <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
+                                    {navigation.map((item) => (
+                                        <Link key={item.name} href={item.href}>
+                                            <a
+                                                key={item.name}
+                                                href={item.href}
+                                                aria-current={item.current ? 'page' : undefined}
+                                                className={'ml-6 text-sm font-medium text-gray-900 hover:underline'}
+                                            >
+                                                {item.name}
+                                            </a>
+                                        </Link>
+                                    ))}
+                                    <a
+                                        href="#"
+                                        className="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
+                                    >
+                                        <span className="sr-only">View notifications</span>
+                                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                                    </a>
 
-                                {/*    /!* Profile dropdown *!/*/}
-                                {/*    <Menu as="div" className="flex-shrink-0 relative ml-5">*/}
-                                {/*        <div>*/}
-                                {/*            <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">*/}
-                                {/*                <span className="sr-only">Open user menu</span>*/}
-                                {/*                <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />*/}
-                                {/*            </Menu.Button>*/}
-                                {/*        </div>*/}
-                                {/*        <Transition*/}
-                                {/*            as={Fragment}*/}
-                                {/*            enter="transition ease-out duration-100"*/}
-                                {/*            enterFrom="transform opacity-0 scale-95"*/}
-                                {/*            enterTo="transform opacity-100 scale-100"*/}
-                                {/*            leave="transition ease-in duration-75"*/}
-                                {/*            leaveFrom="transform opacity-100 scale-100"*/}
-                                {/*            leaveTo="transform opacity-0 scale-95"*/}
-                                {/*        >*/}
-                                {/*            <Menu.Items className="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none">*/}
-                                {/*                {userNavigation.map((item) => (*/}
-                                {/*                    <Menu.Item key={item.name}>*/}
-                                {/*                        {({ active }) => (*/}
-                                {/*                            <a*/}
-                                {/*                                href={item.href}*/}
-                                {/*                                className={classNames(*/}
-                                {/*                                    active ? 'bg-gray-100' : '',*/}
-                                {/*                                    'block py-2 px-4 text-sm text-gray-700'*/}
-                                {/*                                )}*/}
-                                {/*                            >*/}
-                                {/*                                {item.name}*/}
-                                {/*                            </a>*/}
-                                {/*                        )}*/}
-                                {/*                    </Menu.Item>*/}
-                                {/*                ))}*/}
-                                {/*            </Menu.Items>*/}
-                                {/*        </Transition>*/}
-                                {/*    </Menu>*/}
+                                    {/* Profile dropdown */}
+                                    {/*<Menu as="div" className="flex-shrink-0 relative ml-5">*/}
+                                    {/*    <div>*/}
+                                    {/*        <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">*/}
+                                    {/*            <span className="sr-only">Open user menu</span>*/}
+                                    {/*            <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />*/}
+                                    {/*        </Menu.Button>*/}
+                                    {/*    </div>*/}
+                                    {/*    <Transition*/}
+                                    {/*        as={Fragment}*/}
+                                    {/*        enter="transition ease-out duration-100"*/}
+                                    {/*        enterFrom="transform opacity-0 scale-95"*/}
+                                    {/*        enterTo="transform opacity-100 scale-100"*/}
+                                    {/*        leave="transition ease-in duration-75"*/}
+                                    {/*        leaveFrom="transform opacity-100 scale-100"*/}
+                                    {/*        leaveTo="transform opacity-0 scale-95"*/}
+                                    {/*    >*/}
+                                    {/*        <Menu.Items className="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none">*/}
+                                    {/*            {userNavigation.map((item) => (*/}
+                                    {/*                <Menu.Item key={item.name}>*/}
+                                    {/*                    {({ active }) => (*/}
+                                    {/*                        <a*/}
+                                    {/*                            href={item.href}*/}
+                                    {/*                            className={classNames(*/}
+                                    {/*                                active ? 'bg-gray-100' : '',*/}
+                                    {/*                                'block py-2 px-4 text-sm text-gray-700'*/}
+                                    {/*                            )}*/}
+                                    {/*                        >*/}
+                                    {/*                            {item.name}*/}
+                                    {/*                        </a>*/}
+                                    {/*                    )}*/}
+                                    {/*                </Menu.Item>*/}
+                                    {/*            ))}*/}
+                                    {/*        </Menu.Items>*/}
+                                    {/*    </Transition>*/}
+                                    {/*</Menu>*/}
 
-                                {/*    <a*/}
-                                {/*        href="#"*/}
-                                {/*        className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"*/}
-                                {/*    >*/}
-                                {/*        New Post*/}
-                                {/*    </a>*/}
-                                {/*</div>*/}
+                                    <Link href={'/todo'}>
+                                        <a href="/todo" className="ml-6 text-sm font-medium text-gray-900 hover:underline">
+                                            ログイン
+                                        </a>
+                                    </Link>
+                                    <Link href={'/todo'}>
+                                        <a
+                                            href="/todo"
+                                            className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
+                                        >
+                                            登録
+                                        </a>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
@@ -277,147 +310,9 @@ const Layout = ({ preview, children }: Props) => {
             </Popover>
 
             <div className="py-10">
-                <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-                    <div className="hidden lg:block lg:col-span-3 xl:col-span-2">
-                        <nav aria-label="Sidebar" className="sticky top-4 divide-y divide-gray-300">
-                            <div className="pb-8 space-y-1">
-                                {navigation.map((item) => (
-                                    <a
-                                        key={item.name}
-                                        href={item.href}
-                                        className={classNames(
-                                            item.current ? 'bg-gray-200 text-gray-900' : 'text-gray-600 hover:bg-gray-50',
-                                            'group flex items-center px-3 py-2 text-sm font-medium rounded-md'
-                                        )}
-                                        aria-current={item.current ? 'page' : undefined}
-                                    >
-                                        <item.icon
-                                            className={classNames(
-                                                item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                                'flex-shrink-0 -ml-1 mr-3 h-6 w-6'
-                                            )}
-                                            aria-hidden="true"
-                                        />
-                                        <span className="truncate">{item.name}</span>
-                                    </a>
-                                ))}
-                            </div>
-                            {/*<div className="pt-10">*/}
-                            {/*    <p*/}
-                            {/*        className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider"*/}
-                            {/*        id="communities-headline"*/}
-                            {/*    >*/}
-                            {/*        My communities*/}
-                            {/*    </p>*/}
-                            {/*    <div className="mt-3 space-y-2" aria-labelledby="communities-headline">*/}
-                            {/*        {communities.map((community) => (*/}
-                            {/*            <a*/}
-                            {/*                key={community.name}*/}
-                            {/*                href={community.href}*/}
-                            {/*                className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"*/}
-                            {/*            >*/}
-                            {/*                <span className="truncate">{community.name}</span>*/}
-                            {/*            </a>*/}
-                            {/*        ))}*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
-                        </nav>
-                    </div>
-                    <main className="lg:col-span-9 xl:col-span-6">
-                        {children}
-                    </main>
-                    {/*<aside className="hidden xl:block xl:col-span-4">*/}
-                    {/*    <div className="sticky top-4 space-y-4">*/}
-                    {/*        <section aria-labelledby="who-to-follow-heading">*/}
-                    {/*            <div className="bg-white rounded-lg shadow">*/}
-                    {/*                <div className="p-6">*/}
-                    {/*                    <h2 id="who-to-follow-heading" className="text-base font-medium text-gray-900">*/}
-                    {/*                        Who to follow*/}
-                    {/*                    </h2>*/}
-                    {/*                    <div className="mt-6 flow-root">*/}
-                    {/*                        <ul role="list" className="-my-4 divide-y divide-gray-200">*/}
-                    {/*                            {whoToFollow.map((user) => (*/}
-                    {/*                                <li key={user.handle} className="flex items-center py-4 space-x-3">*/}
-                    {/*                                    <div className="flex-shrink-0">*/}
-                    {/*                                        <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />*/}
-                    {/*                                    </div>*/}
-                    {/*                                    <div className="min-w-0 flex-1">*/}
-                    {/*                                        <p className="text-sm font-medium text-gray-900">*/}
-                    {/*                                            <a href={user.href}>{user.name}</a>*/}
-                    {/*                                        </p>*/}
-                    {/*                                        <p className="text-sm text-gray-500">*/}
-                    {/*                                            <a href={user.href}>{'@' + user.handle}</a>*/}
-                    {/*                                        </p>*/}
-                    {/*                                    </div>*/}
-                    {/*                                    <div className="flex-shrink-0">*/}
-                    {/*                                        <button*/}
-                    {/*                                            type="button"*/}
-                    {/*                                            className="inline-flex items-center px-3 py-0.5 rounded-full bg-rose-50 text-sm font-medium text-rose-700 hover:bg-rose-100"*/}
-                    {/*                                        >*/}
-                    {/*                                            <PlusSmIcon className="-ml-1 mr-0.5 h-5 w-5 text-rose-400" aria-hidden="true" />*/}
-                    {/*                                            <span>Follow</span>*/}
-                    {/*                                        </button>*/}
-                    {/*                                    </div>*/}
-                    {/*                                </li>*/}
-                    {/*                            ))}*/}
-                    {/*                        </ul>*/}
-                    {/*                    </div>*/}
-                    {/*                    <div className="mt-6">*/}
-                    {/*                        <a*/}
-                    {/*                            href="#"*/}
-                    {/*                            className="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"*/}
-                    {/*                        >*/}
-                    {/*                            View all*/}
-                    {/*                        </a>*/}
-                    {/*                    </div>*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        </section>*/}
-                    {/*        <section aria-labelledby="trending-heading">*/}
-                    {/*            <div className="bg-white rounded-lg shadow">*/}
-                    {/*                <div className="p-6">*/}
-                    {/*                    <h2 id="trending-heading" className="text-base font-medium text-gray-900">*/}
-                    {/*                        Trending*/}
-                    {/*                    </h2>*/}
-                    {/*                    <div className="mt-6 flow-root">*/}
-                    {/*                        <ul role="list" className="-my-4 divide-y divide-gray-200">*/}
-                    {/*                            {trendingPosts.map((post) => (*/}
-                    {/*                                <li key={post.id} className="flex py-4 space-x-3">*/}
-                    {/*                                    <div className="flex-shrink-0">*/}
-                    {/*                                        <img className="h-8 w-8 rounded-full" src={post.user.imageUrl} alt={post.user.name} />*/}
-                    {/*                                    </div>*/}
-                    {/*                                    <div className="min-w-0 flex-1">*/}
-                    {/*                                        <p className="text-sm text-gray-800">{post.body}</p>*/}
-                    {/*                                        <div className="mt-2 flex">*/}
-                    {/*              <span className="inline-flex items-center text-sm">*/}
-                    {/*                <button*/}
-                    {/*                    type="button"*/}
-                    {/*                    className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"*/}
-                    {/*                >*/}
-                    {/*                  <ChatAltIcon className="h-5 w-5" aria-hidden="true" />*/}
-                    {/*                  <span className="font-medium text-gray-900">{post.comments}</span>*/}
-                    {/*                </button>*/}
-                    {/*              </span>*/}
-                    {/*                                        </div>*/}
-                    {/*                                    </div>*/}
-                    {/*                                </li>*/}
-                    {/*                            ))}*/}
-                    {/*                        </ul>*/}
-                    {/*                    </div>*/}
-                    {/*                    <div className="mt-6">*/}
-                    {/*                        <a*/}
-                    {/*                            href="#"*/}
-                    {/*                            className="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"*/}
-                    {/*                        >*/}
-                    {/*                            View all*/}
-                    {/*                        </a>*/}
-                    {/*                    </div>*/}
-                    {/*                </div>*/}
-                    {/*            </div>*/}
-                    {/*        </section>*/}
-                    {/*    </div>*/}
-                    {/*</aside>*/}
-                </div>
+                <main className="flex flex-col flex-1">
+                    {children}
+                </main>
             </div>
         </div>
       <Footer />

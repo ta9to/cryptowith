@@ -12,6 +12,8 @@ permissions:
 jobs:
   deploy-to-s3:
     runs-on: ubuntu-latest
+    environment:
+      name: deploy
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v2
@@ -20,6 +22,11 @@ jobs:
         with:
           node-version: 16.x
       - run: npm install
+      - name: Create env file
+        run: |
+          touch .env
+          echo CMC_PRO_API_KEY=${{ secrets.CMC_PRO_API_KEY }} >> .env
+          cat .env
       - run: npm run export
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
