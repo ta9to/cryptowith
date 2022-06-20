@@ -1,8 +1,30 @@
 {
   "ethereum": {
-    "name": "ethereum",
+    "name": "Ethereum",
+    "slug": "ethereum",
     "unit": "ETH",
-    "description": "Ethereum is a smart contract platform that enables developers to build decentralized applications and decentralized autonomous organizations. Ethereum offers extensive tooling and is the dominant platform for ICOs, dApps and DAOs.",
-    "webSite": "https://ethereum.org/ja/"
+    "description": "イーサリアムはスマートコントラクトの開発基盤であり、イーサリアムを使用して開発者は分散型組織（DAO）や分散型アプリケーション（DApp）の開発が行えます。イーサリアムはICOs DApp DAOの運営にとって重要なチェーンであり、支配的なプラットフォームです。",
+    "webSite": "https://ethereum.org/ja/",
+    "icon": "/assets/cryptos/Ethereum.png",
+    "features" : [
+      "最も代表的なスマートコントラクトブロックチェーン",
+      "分散型金融の主要基盤",
+      "1000以上の会社が使用する巨大なエコシステム"
+    ],
+    "officialVideoId": "j23HnORQXvs"
+  },
+  "bitcoin": {
+    "name": "Bitcoin",
+    "slug": "bitcoin",
+    "unit": "BTC",
+    "description": "ビットコインは実験的なデジタル通貨であり、世界中の誰にでもどこからでも即座に支払いを行うことができ、またP2P技術を使用して中央の権限なしで動作する通貨です。トランザクションの管理と新規コインの発行はネットワークによってまとめて実行されます。",
+    "webSite": "https://bitcoin.org/ja/",
+    "icon": "/assets/cryptos/Bitcoin.png",
+    "features" : [
+      "人類初の分散型仮想通貨",
+      "最も使用者数の多い仮想通貨",
+      "1000以上の会社が使用する巨大なエコシステム"
+    ],
+    "officialVideoId": "Gc2en3nHxA4"
   }  
 }
