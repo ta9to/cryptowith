@@ -229,7 +229,7 @@ export const getStaticProps = async () => {
         // 'USDC',
         // 'BNB',
         // 'XRP',
-        // 'SOL',
+        'SOL',
         // 'DOGE',
         'DOT',
         // 'SHIB',
